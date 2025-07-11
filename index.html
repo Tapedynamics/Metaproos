@@ -8,8 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
-    <!-- Libreria per interpretare il Markdown dalla risposta dell'AI -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         html {
             scroll-behavior: smooth;
@@ -26,19 +24,6 @@
         }
         .logo-font {
             font-family: 'Rajdhani', sans-serif;
-        }
-        /* Stile per l'animazione del caricamento */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -142,25 +127,13 @@
         </div>
     </section>
 
-    <!-- Contatti & AI Planner Section -->
+    <!-- Contatti Section -->
     <section id="contatti" class="py-20 bg-gray-900">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold mb-4">Pronto per l'Avventura?</h2>
-            <p class="text-lg text-gray-400 mb-12">Non sai quale escursione scegliere? Chiedi al nostro assistente AI o compila il modulo classico.</p>
+            <p class="text-lg text-gray-400 mb-12">Contattaci per prenotare la tua escursione o per richiedere maggiori informazioni.</p>
             
-            <div id="ai-planner" class="max-w-xl mx-auto mb-16 bg-gray-800 p-8 rounded-lg">
-                <h3 class="text-2xl font-bold text-white mb-4">✨ Pianificatore di Escursioni AI</h3>
-                <p class="text-gray-400 mb-4">Descrivi cosa cerchi e ti suggeriremo l'esperienza perfetta per te. Esempio: "Siamo una coppia e vorremmo delle belle foto ricordo sotto le stelle, ma non siamo fotografi."</p>
-                <textarea id="ai-prompt" placeholder="La tua richiesta..." rows="4" class="w-full bg-gray-700 border-gray-600 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                <button id="ai-submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg">
-                    Chiedi all'AI
-                </button>
-                <div id="ai-loader" class="hidden mx-auto mt-6 loader"></div>
-                <div id="ai-response" class="hidden mt-6 p-4 bg-gray-700 rounded-lg text-left"></div>
-            </div>
-
-            <h3 class="text-3xl font-bold mb-4">Contatto Diretto</h3>
-            <!-- MODULO DI CONTATTO ATTIVATO -->
+            <!-- MODULO DI CONTATTO DIRETTO -->
             <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST" class="max-w-xl mx-auto">
                 <div class="flex flex-col md:flex-row gap-4 mb-4">
                     <input type="text" name="name" placeholder="Il tuo nome" required class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -201,75 +174,6 @@
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
             });
-        });
-
-        // --- LOGICA PER IL PIANIFICATORE AI ---
-        const submitButton = document.getElementById('ai-submit');
-        const promptTextarea = document.getElementById('ai-prompt');
-        const responseDiv = document.getElementById('ai-response');
-        const loader = document.getElementById('ai-loader');
-
-        submitButton.addEventListener('click', async () => {
-            const userPrompt = promptTextarea.value;
-            if (!userPrompt) {
-                alert('Per favore, inserisci la tua richiesta.');
-                return;
-            }
-
-            loader.classList.remove('hidden');
-            responseDiv.classList.add('hidden');
-            
-            const servicesContext = `
-                Sei un consulente esperto per "Metaproos", un'azienda che organizza escursioni fotografiche sul Teide.
-                Il tuo compito è consigliare al cliente il pacchetto migliore in base alla sua richiesta.
-                Rispondi in italiano, in modo cordiale e professionale.
-                I servizi disponibili sono:
-                1. Tour Astrofotografico: Per chi vuole fotografare il cielo notturno (Via Lattea, stelle, etc.). Adatto a chi ha già un po' di dimestichezza con la fotografia.
-                2. Ritratti sotto le Stelle: Per chi vuole essere fotografato sotto le stelle. Perfetto per coppie, famiglie e chiunque voglia un ricordo spettacolare senza essere un fotografo.
-                3. Lezioni Private di Fotografia: Per chi vuole imparare le tecniche della fotografia notturna sul campo. Adatto a tutti i livelli.
-
-                Analizza la richiesta del cliente e suggerisci uno di questi tre pacchetti, spiegando chiaramente il perché della tua scelta. Se la richiesta è troppo generica per suggerire un pacchetto specifico, chiedi gentilmente maggiori dettagli. Inizia la tua risposta con un titolo, ad esempio "### La mia raccomandazione per te".
-            `;
-
-            try {
-                let chatHistory = [];
-                chatHistory.push({ role: "user", parts: [{ text: servicesContext + "\n\nEcco la richiesta del cliente: " + userPrompt }] });
-                const payload = { contents: chatHistory };
-                const apiKey = ""; // API Key gestita dall'ambiente
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-                
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Errore API: ${response.statusText}`);
-                }
-
-                const result = await response.json();
-                
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    
-                    const rawText = result.candidates[0].content.parts[0].text;
-                    responseDiv.innerHTML = marked.parse(rawText);
-                    responseDiv.classList.remove('hidden');
-
-                } else {
-                    // Se non ci sono candidati, mostra un messaggio di errore generico.
-                    throw new Error('Nessuna risposta valida ricevuta dall\'API.');
-                }
-
-            } catch (error) {
-                console.error('Errore nella chiamata a Gemini:', error);
-                responseDiv.textContent = 'Si è verificato un errore. Per favore, riprova più tardi o usa il modulo di contatto classico.';
-                responseDiv.classList.remove('hidden');
-            } finally {
-                loader.classList.add('hidden');
-            }
         });
     </script>
 
