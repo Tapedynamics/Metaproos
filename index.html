@@ -228,7 +228,7 @@
                 2. Ritratti sotto le Stelle: Per chi vuole essere fotografato sotto le stelle. Perfetto per coppie, famiglie e chiunque voglia un ricordo spettacolare senza essere un fotografo.
                 3. Lezioni Private di Fotografia: Per chi vuole imparare le tecniche della fotografia notturna sul campo. Adatto a tutti i livelli.
 
-                Analizza la richiesta del cliente e suggerisci uno di questi tre pacchetti, spiegando chiaramente il perché della tua scelta. Inizia la tua risposta con un titolo, ad esempio "### La mia raccomandazione per te".
+                Analizza la richiesta del cliente e suggerisci uno di questi tre pacchetti, spiegando chiaramente il perché della tua scelta. Se la richiesta è troppo generica per suggerire un pacchetto specifico, chiedi gentilmente maggiori dettagli. Inizia la tua risposta con un titolo, ad esempio "### La mia raccomandazione per te".
             `;
 
             try {
@@ -259,8 +259,8 @@
                     responseDiv.classList.remove('hidden');
 
                 } else {
-                    responseDiv.textContent = 'Spiacente, non ho potuto elaborare la tua richiesta. Riprova.';
-                    responseDiv.classList.remove('hidden');
+                    // Se non ci sono candidati, mostra un messaggio di errore generico.
+                    throw new Error('Nessuna risposta valida ricevuta dall\'API.');
                 }
 
             } catch (error) {
