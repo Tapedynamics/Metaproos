@@ -1,179 +1,234 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metaproos - Fotografia di Paesaggi e Avventura</title>
+    <title>Metaproos - Fotografo</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icone (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
+        /* Applica il font Inter a tutto il sito */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Grigio scuro */
-            color: #E5E7EB; /* Grigio chiaro */
+            background-color: #f8f9fa; /* Un grigio molto chiaro per lo sfondo */
         }
-        .hero-bg {
-            background-image: url('https://images.unsplash.com/photo-1534999793441-a790b3a32f69?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+        /* Stile per le immagini della galleria con un leggero zoom all'hover */
+        .gallery-img {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
-        .logo-font {
-            font-family: 'Rajdhani', sans-serif;
+        .gallery-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        /* Animazione per l'apparizione delle sezioni */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="text-gray-800">
 
-    <!-- Header & Nav -->
-    <header class="bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 w-full z-20 p-4 flex justify-between items-center">
-        <div class="h-12 flex items-center">
-            <a href="#" class="text-3xl font-bold text-white uppercase tracking-widest logo-font">Metaproos</a>
-        </div>
-        <nav class="hidden md:flex items-center space-x-6">
-            <a href="#servizi" class="hover:text-white transition-colors">Servizi</a>
-            <a href="#galleria" class="hover:text-white transition-colors">Galleria</a>
-            <a href="#contatti" class="hover:text-white transition-colors">Contatti</a>
-            <a href="https://tapedynamics.pic-time.com/AFiUqxbsE2e6y" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                Area Clienti
+    <!-- Header e Navigazione -->
+    <header id="header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold tracking-wider text-gray-900">METAPROOS</a>
+            
+            <!-- Navigazione per Desktop -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#portfolio" class="text-gray-600 hover:text-gray-900 transition">Portfolio</a>
+                <a href="#about" class="text-gray-600 hover:text-gray-900 transition">Chi Sono</a>
+                <a href="#contact" class="text-gray-600 hover:text-gray-900 transition">Contatti</a>
+            </nav>
+
+            <!-- Pulsante Pictime -->
+            <a href="https://tapedynamics.pic-time.com/AFiUqxbsE2e6y" target="_blank" class="hidden md:inline-block bg-gray-800 text-white font-semibold px-5 py-2 rounded-lg hover:bg-gray-900 transition-colors shadow-md">
+                Cerca le tue foto
             </a>
-        </nav>
-        <!-- Pulsante Hamburger per mobile -->
-        <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
+
+            <!-- Menu per Mobile -->
+            <button id="mobile-menu-button" class="md:hidden">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+            </button>
+        </div>
+        
+        <!-- Menu a tendina per Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#portfolio" class="block text-center py-3 px-6 text-gray-600 hover:bg-gray-100">Portfolio</a>
+            <a href="#about" class="block text-center py-3 px-6 text-gray-600 hover:bg-gray-100">Chi Sono</a>
+            <a href="#contact" class="block text-center py-3 px-6 text-gray-600 hover:bg-gray-100">Contatti</a>
+            <div class="p-4">
+                 <!-- Link a Pictime aggiornato -->
+                <a href="https://tapedynamics.pic-time.com/AFiUqxbsE2e6y" target="_blank" class="block w-full text-center bg-gray-800 text-white font-semibold px-5 py-3 rounded-lg hover:bg-gray-900 transition-colors">
+                    Cerca le tue foto
+                </a>
+            </div>
+        </div>
     </header>
 
-    <!-- Menù Mobile -->
-    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-gray-900 z-30">
-        <div class="flex flex-col items-center justify-center h-full">
-            <a href="#servizi" class="mobile-menu-link text-2xl text-white py-4">Servizi</a>
-            <a href="#galleria" class="mobile-menu-link text-2xl text-white py-4">Galleria</a>
-            <a href="#contatti" class="mobile-menu-link text-2xl text-white py-4">Contatti</a>
-            <a href="https://tapedynamics.pic-time.com/AFiUqxbsE2e6y" target="_blank" rel="noopener noreferrer" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-                Area Clienti
-            </a>
-        </div>
-        <button id="close-menu-button" class="absolute top-6 right-6 text-white">
-             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-    </div>
+    <main>
+        <!-- Sezione Home -->
+        <section id="home" class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://placehold.co/1920x1080/222/FFF?text=Metaproos');">
+            <div class="text-center text-white bg-black bg-opacity-40 p-10 rounded-lg">
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight">Metaproos</h1>
+                <p class="mt-4 text-lg md:text-xl font-light">Catturiamo momenti, creiamo ricordi.</p>
+            </div>
+        </section>
 
-
-    <!-- Hero Section -->
-    <section class="hero-bg h-screen flex items-center justify-center text-center relative">
-        <div class="absolute inset-0 bg-black opacity-60"></div>
-        <div class="relative z-5 p-8">
-            <h1 class="text-5xl md:text-7xl font-black text-white uppercase tracking-wider logo-font">METAPROOS</h1>
-            <p class="text-xl md:text-2xl text-gray-300 mt-4 max-w-2xl mx-auto">Bring Out The Best Part. Catturiamo la magia del cielo notturno e l'avventura dei paesaggi vulcanici del Teide.</p>
-            <a href="#servizi" class="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg">
-                Scopri le Escursioni
-            </a>
-        </div>
-    </section>
-
-    <!-- Servizi Section -->
-    <section id="servizi" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-2">Escursioni Fotografiche sul Teide</h2>
-            <p class="text-lg text-gray-400 mb-12">Un'esperienza unica che unisce trekking, astronomia e fotografia professionale.</p>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div id="tour-astrofotografico" class="bg-gray-800 rounded-lg p-8 transform hover:scale-105 transition-transform">
-                    <h3 class="text-2xl font-bold mb-4 text-white">Tour Astrofotografico</h3>
-                    <p class="text-gray-400">Un viaggio guidato nei migliori punti di osservazione del Parco Nazionale del Teide per fotografare la Via Lattea, le stelle cadenti e le costellazioni come non le hai mai viste.</p>
+        <!-- Sezione Portfolio -->
+        <section id="portfolio" class="py-20 md:py-28 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold">Portfolio</h2>
+                    <p class="text-gray-600 mt-2">Una selezione dei nostri lavori più recenti.</p>
                 </div>
-                <div id="ritratti-sotto-le-stelle" class="bg-gray-800 rounded-lg p-8 transform hover:scale-105 transition-transform">
-                    <h3 class="text-2xl font-bold mb-4 text-white">Ritratti sotto le Stelle</h3>
-                    <p class="text-gray-400">Creiamo ritratti mozzafiato e unici per te, la tua famiglia o i tuoi amici, usando il cielo stellato del Teide come uno studio fotografico naturale e spettacolare.</p>
-                </div>
-                <div id="lezioni-private" class="bg-gray-800 rounded-lg p-8 transform hover:scale-105 transition-transform">
-                    <h3 class="text-2xl font-bold mb-4 text-white">Lezioni Private di Fotografia</h3>
-                    <p class="text-gray-400">Impara le tecniche della fotografia notturna direttamente sul campo. Dalle basi della lunga esposizione ai segreti per catturare la Via Lattea. Adatto a tutti i livelli.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Sostituisci le immagini con le tue foto -->
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/600x400/a9a9a9/FFF?text=Matrimonio" alt="Foto di un matrimonio" class="w-full h-full object-cover gallery-img">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/600x400/808080/FFF?text=Ritratto" alt="Foto di un ritratto" class="w-full h-full object-cover gallery-img">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/600x400/696969/FFF?text=Evento" alt="Foto di un evento" class="w-full h-full object-cover gallery-img">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/600x400/778899/FFF?text=Paesaggio" alt="Foto di un paesaggio" class="w-full h-full object-cover gallery-img">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/600x400/708090/FFF?text=Famiglia" alt="Foto di famiglia" class="w-full h-full object-cover gallery-img">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/600x400/5F9EA0/FFF?text=Moda" alt="Foto di moda" class="w-full h-full object-cover gallery-img">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Galleria Section -->
-    <section id="galleria" class="py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12">I Nostri Scatti Migliori</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                 <div class="grid gap-4">
-                    <div><img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1506703195836-3b39e0843a49?q=80&w=1887&auto=format&fit=crop" alt="Paesaggio montano al tramonto"></div>
-                    <div><img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1517832225332-d546155459b5?q=80&w=1887&auto=format&fit=crop" alt="Persona che guarda le stelle"></div>
-                </div>
-                <div class="grid gap-4">
-                    <div><img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?q=80&w=2070&auto=format&fit=crop" alt="Lago di montagna con riflesso"></div>
-                    <div><img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1542358488-7517e23545b3?q=80&w=1887&auto=format&fit=crop" alt="Strada di montagna di notte"></div>
-                </div>
-                <div class="grid gap-4">
-                    <div><img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=2070&auto=format&fit=crop" alt="Cielo notturno con Via Lattea"></div>
-                    <div><img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1505539742449-335fab1a3184?q=80&w=1887&auto=format&fit=crop" alt="Tenda illuminata sotto le stelle"></div>
-                </div>
-                <div class="grid gap-4">
-                    <div><img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=2070&auto=format&fit=crop" alt="Persona con torcia che guarda la Via Lattea"></div>
-                    <div><img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=2070&auto=format&fit=crop" alt="Cielo stellato sopra una foresta"></div>
+        <!-- Sezione Chi Sono -->
+        <section id="about" class="py-20 md:py-28 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/600x600/333/FFF?text=Fotografo" alt="Il fotografo" class="rounded-lg shadow-xl w-full">
+                    </div>
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h2 class="text-4xl font-bold">La nostra visione</h2>
+                        <p class="mt-4 text-gray-600 leading-relaxed">
+                            Benvenuti in Metaproos. Siamo più di semplici fotografi; siamo narratori di storie. La nostra passione è catturare l'essenza dei momenti più preziosi, trasformando emozioni fugaci in ricordi eterni. Con un approccio artistico e un occhio per i dettagli, creiamo immagini che parlano, che raccontano la vostra storia in modo autentico ed elegante.
+                        </p>
+                        <p class="mt-4 text-gray-600 leading-relaxed">
+                            Ogni scatto è un dialogo tra luce, emozione e composizione, mirato a creare un'opera d'arte che vi rappresenti.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contatti Section -->
-    <section id="contatti" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-4">Pronto per l'Avventura?</h2>
-            <p class="text-lg text-gray-400 mb-12">Contattaci per prenotare la tua escursione o per richiedere maggiori informazioni.</p>
-            
-            <!-- MODULO DI CONTATTO DIRETTO -->
-            <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST" class="max-w-xl mx-auto">
-                <div class="flex flex-col md:flex-row gap-4 mb-4">
-                    <input type="text" name="name" placeholder="Il tuo nome" required class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="email" name="email" placeholder="La tua email" required class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <!-- Sezione Contatti -->
+        <section id="contact" class="py-20 md:py-28 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold">Contattaci</h2>
+                    <p class="text-gray-600 mt-2">Hai un progetto in mente? Raccontacelo.</p>
                 </div>
-                <textarea name="message" placeholder="Il tuo messaggio" rows="4" required class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg">
-                    Invia Messaggio
-                </button>
-            </form>
-        </div>
-    </section>
+                <div class="max-w-xl mx-auto">
+                    <!-- Per far funzionare il form, è necessario un servizio backend come Formspree o Netlify Forms -->
+                    <form action="#" method="POST" class="space-y-6">
+                        <div>
+                            <label for="name" class="sr-only">Nome</label>
+                            <input type="text" name="name" id="name" placeholder="Il tuo nome" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-800 transition">
+                        </div>
+                        <div>
+                            <label for="email" class="sr-only">Email</label>
+                            <input type="email" name="email" id="email" placeholder="La tua email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-800 transition">
+                        </div>
+                        <div>
+                            <label for="message" class="sr-only">Messaggio</label>
+                            <textarea name="message" id="message" rows="5" placeholder="Il tuo messaggio" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-800 transition"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-gray-800 text-white font-bold px-8 py-3 rounded-lg hover:bg-gray-900 transition-colors shadow-lg">Invia Messaggio</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800 py-6">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p>&copy; 2025 Metaproos. Tutti i diritti riservati.</p>
-            <p class="text-sm mt-2">Sito web creato con passione</p>
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600">&copy; 2024 Metaproos. Tutti i diritti riservati.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <!-- Sostituisci '#' con i link ai tuoi social media -->
+                    <a href="#" class="text-gray-500 hover:text-gray-800 transition"><i data-lucide="instagram" class="h-6 w-6"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-gray-800 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-gray-800 transition"><i data-lucide="twitter" class="h-6 w-6"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // --- LOGICA PER IL MENU MOBILE ---
+        // Inizializzazione delle icone Lucide
+        lucide.createIcons();
+
+        // Gestione del menu mobile
         const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const closeMenuButton = document.getElementById('close-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
         mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.toggle('hidden');
         });
-
-        closeMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-        });
-
-        mobileMenuLinks.forEach(link => {
+        
+        // Chiudi il menu mobile quando si clicca un link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
             });
+        });
+
+        // Gestione dell'header che si rimpicciolisce allo scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+        });
+
+        // Gestione animazione fade-in per le sezioni
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 
