@@ -160,12 +160,13 @@
             </div>
 
             <h3 class="text-3xl font-bold mb-4">Contatto Diretto</h3>
-            <form class="max-w-xl mx-auto">
+            <!-- MODULO DI CONTATTO ATTIVATO -->
+            <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST" class="max-w-xl mx-auto">
                 <div class="flex flex-col md:flex-row gap-4 mb-4">
-                    <input type="text" placeholder="Il tuo nome" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="email" placeholder="La tua email" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" name="name" placeholder="Il tuo nome" required class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="email" name="email" placeholder="La tua email" required class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <textarea placeholder="Il tuo messaggio" rows="4" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                <textarea name="message" placeholder="Il tuo messaggio" rows="4" required class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg">
                     Invia Messaggio
                 </button>
@@ -234,7 +235,7 @@
                 let chatHistory = [];
                 chatHistory.push({ role: "user", parts: [{ text: servicesContext + "\n\nEcco la richiesta del cliente: " + userPrompt }] });
                 const payload = { contents: chatHistory };
-                const apiKey = ""; 
+                const apiKey = ""; // API Key gestita dall'ambiente
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
                 const response = await fetch(apiUrl, {
